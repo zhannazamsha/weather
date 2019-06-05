@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import weather.domain.Location;
 
-import java.io.IOException;
 
 @Service
 public class LocationByIpClient {
@@ -24,9 +23,7 @@ public class LocationByIpClient {
                 .build();
     }
 
-
-    public Location getLocation(String ip) throws IOException {
-        restTemplate.getErrorHandler().handleError(null);
+    public Location getLocation(String ip) {
         ResponseEntity<Location> response
                 = restTemplate.getForEntity(ipLocationUrl + ip, Location.class);
         return response.getBody();
