@@ -29,7 +29,7 @@ public class LocationByIpClientTest {
         private RestTemplateBuilder builder;
 
         @Bean
-        public LocationByIpClient blacklistService() {
+        public LocationByIpClient locationByIpClientService() {
             return new LocationByIpClient(this.builder
                     .errorHandler(new RestTemplateResponseErrorHandler()));
         }
