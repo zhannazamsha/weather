@@ -27,21 +27,26 @@ public class WeatherByLocationClient {
 
     }
 
-    public Weather getWeatherByLocation(Location location) throws IOException {
+    public Weather getWeatherByLocation(Location location) {
         ResponseEntity<String> response
                 = restTemplate.getForEntity( String.format(locationWeatherUrl, location.getLon(), location.getLat()),
                 String.class);
-        JsonNode productNode = new ObjectMapper().readTree(response.getBody());
+        JsonNode productNode = null;
+        try {
+            productNode = new ObjectMapper().readTree(response.getBody());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return weatherMapping(productNode);
     }
 
     private Weather weatherMapping(JsonNode productNode) {
         Weather weather = new Weather();
-        weather.setHumidity(productNode.get("main").findValue("humidity").textValue());
-        weather.setMain(productNode.get("weather").findValue("description").textValue());
-        weather.setPressure(productNode.get("main").findValue("pressure").textValue());
-        weather.setTemp(productNode.get("main").findValue("temp").textValue());
-        weather.setWind(productNode.get("wind").findValue("speed").textValue());
+        weather.setHumidity(productNode.get("main").findValue("humidity").asText());
+        weather.setMain(productNode.get("weather").findValue("description").asText());
+        weather.setPressure(productNode.get("main").findValue("pressure").asText());
+        weather.setTemp(productNode.get("main").findValue("temp").asText());
+        weather.setWind(productNode.get("wind").findValue("speed").asText());
         return weather;
     }
 
