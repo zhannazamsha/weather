@@ -17,10 +17,9 @@ public class LocationByIpClient {
     private RestTemplate restTemplate;
 
     @Autowired
-    public LocationByIpClient(RestTemplateBuilder restTemplateBuilder) {
-        restTemplate = restTemplateBuilder
-                .errorHandler(new RestTemplateResponseErrorHandler())
-                .build();
+    public LocationByIpClient() {
+        restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
     }
 
     public Location getLocation(String ip) {
