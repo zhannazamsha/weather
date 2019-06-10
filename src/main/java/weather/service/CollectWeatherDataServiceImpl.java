@@ -10,6 +10,8 @@ import weather.client.WeatherByLocationClient;
 import weather.domain.WeatherResponse;
 import weather.domain.repositories.WeatherResponseRepository;
 
+import java.time.LocalDate;
+
 @Service
 public class CollectWeatherDataServiceImpl implements CollectWeatherDataService {
 
@@ -28,6 +30,7 @@ public class CollectWeatherDataServiceImpl implements CollectWeatherDataService 
     public WeatherResponse collect(String ip) {
         WeatherResponse weatherResponse = new WeatherResponse();
         weatherResponse.setIp(ip);
+        weatherResponse.setResponseDate(LocalDate.now());
         weatherResponse.setLocation(locationByIpClient.getLocation(weatherResponse.getIp()));
         weatherResponse.setWeather(weatherByLocationClient
                 .getWeatherByLocation(weatherResponse.getLocation()));
