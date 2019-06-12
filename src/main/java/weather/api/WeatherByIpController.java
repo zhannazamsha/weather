@@ -8,6 +8,7 @@ import weather.domain.WeatherResponse;
 import weather.service.CollectWeatherDataService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 
 @RestController
@@ -17,10 +18,12 @@ public class WeatherByIpController {
     private CollectWeatherDataService collectWeatherDataService;
 
     @GetMapping("/weather")
-    public ResponseEntity<WeatherResponse> getWeatherByIp(HttpServletRequest request) {
+    public ResponseEntity<WeatherResponse> getWeatherByIp(HttpServletRequest request) throws IOException {
         String ip = request.getRemoteAddr();
-        //  ip = "24.48.0.1";
+        ip = "77.38.182.232"; // for testing
         WeatherResponse response = collectWeatherDataService.collect(ip);
         return ResponseEntity.ok(response);
     }
+
+
 }

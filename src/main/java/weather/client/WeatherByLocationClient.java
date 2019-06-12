@@ -27,17 +27,11 @@ public class WeatherByLocationClient {
 
     }
 
-    public Weather getWeatherByLocation(Location location) {
+    public Weather getWeatherByLocation(Location location) throws IOException {
         ResponseEntity<String> response
                 = restTemplate.getForEntity( String.format(locationWeatherUrl, location.getLon(), location.getLat()),
                 String.class);
-
-        JsonNode productNode = null;
-        try {
-            productNode = new ObjectMapper().readTree(response.getBody());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        JsonNode productNode = new ObjectMapper().readTree(response.getBody());
         return weatherMapping(productNode);
     }
 

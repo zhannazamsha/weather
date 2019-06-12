@@ -10,6 +10,7 @@ import weather.client.WeatherByLocationClient;
 import weather.domain.WeatherResponse;
 import weather.domain.repositories.WeatherResponseRepository;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
@@ -27,7 +28,7 @@ public class CollectWeatherDataServiceImpl implements CollectWeatherDataService 
 
     @Override
     @Cacheable(value = "responses", key = "#ip")
-    public WeatherResponse collect(String ip) {
+    public WeatherResponse collect(String ip) throws IOException {
         WeatherResponse weatherResponse = new WeatherResponse();
         weatherResponse.setIp(ip);
         weatherResponse.setResponseDate(LocalDate.now());

@@ -16,6 +16,7 @@ import weather.domain.Weather;
 import weather.domain.WeatherResponse;
 import weather.domain.repositories.WeatherResponseRepository;
 
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,7 +33,7 @@ public class CollectWeatherDataServiceTest {
     private WeatherResponseRepository weatherResponseRepository;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         Location location = new Location().builder().lat(1f).lon(1f).city("City").build();
         Weather weather = new Weather().builder().main("sunny").build();
         WeatherResponse weatherResponse = new WeatherResponse().builder().ip("333.21.34.6").build();
@@ -48,7 +49,7 @@ public class CollectWeatherDataServiceTest {
     }
 
     @Test
-    public void collect_givenIp_returnWeather() {
+    public void collect_givenIp_returnWeather() throws IOException {
         WeatherResponse weatherResponse = collectWeatherDataService.collect("333.21.34.6");
         assertThat(weatherResponse)
                 .isNotNull();
