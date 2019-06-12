@@ -31,7 +31,10 @@ public class CollectWeatherDataServiceImpl implements CollectWeatherDataService 
         WeatherResponse weatherResponse = new WeatherResponse();
         weatherResponse.setIp(ip);
         weatherResponse.setResponseDate(LocalDate.now());
-        weatherResponse.setLocation(locationByIpClient.getLocation(weatherResponse.getIp()));
+        //3rd part api return status 200 in any case - success or error
+        weatherResponse.setLocation(locationByIpClient
+                .getLocation(weatherResponse.getIp()));
+        //3rd part api is demo version - always return result for one location
         weatherResponse.setWeather(weatherByLocationClient
                 .getWeatherByLocation(weatherResponse.getLocation()));
         weatherResponseRepository.save(weatherResponse);

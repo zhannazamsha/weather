@@ -1,7 +1,5 @@
 package weather.client;
 
-import javassist.NotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;
@@ -18,17 +16,14 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
         return (
                 httpResponse.getStatusCode().series() == CLIENT_ERROR
                         || httpResponse.getStatusCode().series() == SERVER_ERROR);
+        //3rd part api for getting location return status 200 in any case - success or error
+        //3rd part api for weather is demo version - always return result for one location
+
     }
 
     @Override
     public void handleError(ClientHttpResponse httpResponse) throws IOException {
-        if (httpResponse.getStatusCode()
-                .series() == HttpStatus.Series.SERVER_ERROR) {
-        } else if (httpResponse.getStatusCode()
-                .series() == HttpStatus.Series.CLIENT_ERROR) {
-            if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw new RuntimeException("Not found");
-            }
-        }
+        throw new ResourceErrorException(httpResponse.getStatusText());
+
     }
 }

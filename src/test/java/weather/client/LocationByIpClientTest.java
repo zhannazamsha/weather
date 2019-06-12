@@ -33,4 +33,6 @@ public class LocationByIpClientTest {
         assertThat(location.getCity())
                 .isEqualTo("Saint-Leonard");
     }
+
+
 }

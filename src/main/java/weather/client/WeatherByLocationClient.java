@@ -31,6 +31,7 @@ public class WeatherByLocationClient {
         ResponseEntity<String> response
                 = restTemplate.getForEntity( String.format(locationWeatherUrl, location.getLon(), location.getLat()),
                 String.class);
+
         JsonNode productNode = null;
         try {
             productNode = new ObjectMapper().readTree(response.getBody());
