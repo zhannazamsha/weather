@@ -33,10 +33,10 @@ public class WeatherByLocationClientTest {
     }
 
     @Test
-    public void getLocation_ipPassed_shouldReturnLocation() throws IOException {
+    public void getLocation_locationPassed_shouldReturnLocation() throws IOException {
         Location location  = new Location();
-        location.setLat(35f);
-        location.setLon(139f);
+        location.setLat(37.39f);
+        location.setLon(-122.09f);
         Weather weather = weatherByLocationClient.getWeatherByLocation(location);
         assertThat(weather)
                 .isNotNull();

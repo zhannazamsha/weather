@@ -17,7 +17,6 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
                 httpResponse.getStatusCode().series() == CLIENT_ERROR
                         || httpResponse.getStatusCode().series() == SERVER_ERROR);
         //3rd part api for getting location return status 200 in any case - success or error
-        //3rd part api for weather is demo version - always return result for one location
 
     }
 

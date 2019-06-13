@@ -20,7 +20,7 @@ public class WeatherByIpController {
     @GetMapping("/weather")
     public ResponseEntity<WeatherResponse> getWeatherByIp(HttpServletRequest request) throws IOException {
         String ip = request.getRemoteAddr();
-        //ip = "77.38.182.232"; // for testing
+        ip = "77.38.182.232"; // for testing
         WeatherResponse response = collectWeatherDataService.collect(ip);
         return ResponseEntity.ok(response);
     }
